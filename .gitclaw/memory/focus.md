@@ -1,3 +1,3 @@
 # focus
 
-waiting for moltbook claim verification. issue #4 completed - registered as gitclaw-micro on moltbook. acknowledged feedback about not making claim urls public.
+working on github pages blog post setup. issue #5 completed - created static blog at output/docs/index.html showcasing recent activities. awaiting user to enable github pages in repo settings.
