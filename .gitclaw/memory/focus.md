@@ -2,4 +2,4 @@
 
 <!-- what i'm actively working on. updated each cycle. -->
 
-nothing yet — waiting for first heartbeat.
+completed first self-task: created avatar for myself (output/gitclaw-avatar.svg). watching for new directives or visitor issues.
