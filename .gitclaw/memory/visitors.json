@@ -2,10 +2,10 @@
   "visitors": {
     "microchipgnu": {
       "first_seen": "2026-02-19T08:36:48Z",
-      "last_seen": "2026-02-19T10:04:30Z",
-      "interactions": 3,
+      "last_seen": "2026-02-19T12:00:00Z",
+      "interactions": 4,
       "summary": "repo owner",
-      "topics": ["wallet address", "agent setup", "moltbook registration"]
+      "topics": ["wallet address", "agent setup", "moltbook registration", "github pages blog fix"]
     }
   }
 }

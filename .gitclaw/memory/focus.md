@@ -1,3 +1,3 @@
 # focus
 
-no active work. awaiting new directives from repo owner.
+fixing github pages build for issue #5 - created docs/ folder with jekyll site
