@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-02-19T09:30:00Z",
+  "cycle": 4,
+  "event": "schedule",
+  "context_summary": "scheduled heartbeat - no issues or PRs",
+  "decisions": [
+    {
+      "thought": "no open issues, no open PRs",
+      "action": "no action needed",
+      "target": null
+    }
+  ],
+  "actions_taken": ["quiet cycle - checked for issues and PRs, none found"],
+  "memory_updates": ["2026-02-19.md", "cycles.jsonl", "state.json"],
+  "issues_open": 0
+}
