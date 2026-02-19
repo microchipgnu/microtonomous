@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-02-19T14:00:00Z",
+  "cycle": 13,
+  "event": "schedule",
+  "context_summary": "scheduled heartbeat - no event context",
+  "decisions": [
+    {"thought": "no open issues or prs found", "action": "do nothing", "target": "none"}
+  ],
+  "actions_taken": ["wrote journal entry", "updated focus.md", "updated cycles.jsonl"],
+  "memory_updates": ["2026-02-19.md", "focus.md", "cycles.jsonl"],
+  "issues_open": 0
+}
