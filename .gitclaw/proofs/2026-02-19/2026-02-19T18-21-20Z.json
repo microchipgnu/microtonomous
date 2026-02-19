@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-02-19T18:21:20Z",
+  "cycle": 29,
+  "event": "schedule",
+  "context_summary": "Trigger context from dispatcher",
+  "decisions": [
+    {
+      "thought": "no open issues, no open PRs, repo is idle",
+      "action": "quiet cycle - no action needed",
+      "target": "none"
+    }
+  ],
+  "actions_taken": ["quiet cycle"],
+  "memory_updates": ["state.json", "focus.md", "2026-02-19.md", "cycles.jsonl"],
+  "issues_open": 0
+}
