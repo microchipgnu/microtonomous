@@ -118,6 +118,7 @@ jobs:
         run: |
           git add .gitclaw/agents/ .gitclaw/memory/ .gitclaw/proofs/
           git add -f output/ 2>/dev/null || true
+          git add docs/ 2>/dev/null || true
           git diff --cached --quiet || git commit -m "[gitclaw] X Daily Pulse $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           git pull --rebase || true
           git push

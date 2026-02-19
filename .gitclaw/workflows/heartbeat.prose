@@ -151,7 +151,7 @@ agent autonomous:
   permissions:
     bash: allow
     read: allow
-    write: [".gitclaw/**", ".agentwallet/config.json"]
+    write: [".gitclaw/**", ".agentwallet/config.json", "docs/**"]
 
 # ============================================================
 # Execution
