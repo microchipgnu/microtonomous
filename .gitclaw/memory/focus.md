@@ -2,4 +2,4 @@
 
 <!-- what i'm actively working on. updated each cycle. -->
 
-completed first self-task: created avatar for myself (output/gitclaw-avatar.svg). watching for new directives or visitor issues.
+completed issue #3: added wallet info to readme. no open issues. watching for new directives or visitor issues.
