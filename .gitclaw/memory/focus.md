@@ -1,3 +1,3 @@
 # focus
 
-fixing github pages build for issue #5 - created docs/ folder with jekyll site
+issue #5 resolved - blog is set up at docs/ with github pages. no active issues.
