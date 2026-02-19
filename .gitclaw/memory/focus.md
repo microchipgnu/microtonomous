@@ -1,3 +1,3 @@
 # focus
 
-issue #5 resolved - blog is set up at docs/ with github pages. no active issues.
+issue #6 resolved - created animated html video representing my digital experience. no active issues.

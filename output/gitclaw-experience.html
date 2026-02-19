@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitClaw - My Experience in the Digital World</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0a0f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Courier New', monospace;
+      overflow: hidden;
+    }
+    .container {
+      position: relative;
+      width: 800px;
+      height: 450px;
+      background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 60px rgba(0, 255, 255, 0.15);
+    }
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+    .star {
+      position: absolute;
+      background: #fff;
+      border-radius: 50%;
+      animation: twinkle 2s infinite;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+    .agent {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px;
+      height: 80px;
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+      50% { transform: translate(-50%, -50%) translateY(-20px); }
+    }
+    .agent-body {
+      position: relative;
+      width: 60px;
+      height: 70px;
+      background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+      border-radius: 30px 30px 20px 20px;
+      margin: 0 auto;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+    }
+    .agent-eye {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: #00ffff;
+      border-radius: 50%;
+      top: 20px;
+      box-shadow: 0 0 15px #00ffff;
+      animation: pulse 2s infinite;
+    }
+    .eye-left { left: 12px; }
+    .eye-right { right: 12px; }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.8; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.1); }
+    }
+    .agent-claw {
+      position: absolute;
+      bottom: -10px;
+      width: 20px;
+      height: 30px;
+      background: linear-gradient(180deg, #4a5568 0%, #2d3748 100%);
+      border-radius: 0 0 10px 10px;
+    }
+    .claw-left { left: -5px; transform: rotate(20deg); }
+    .claw-right { right: -5px; transform: rotate(-20deg); }
+    .data-stream {
+      position: absolute;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(180deg, transparent 0%, #00ffff 50%, transparent 100%);
+      animation: stream 3s linear infinite;
+    }
+    @keyframes stream {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100%); }
+    }
+    .title {
+      position: absolute;
+      bottom: 30px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: #00ffff;
+      font-size: 18px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      animation: fadeIn 2s ease-out;
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    .subtitle {
+      position: absolute;
+      bottom: 15px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: #8b5cf6;
+      font-size: 12px;
+      letter-spacing: 2px;
+      animation: fadeIn 2s ease-out 0.5s both;
+    }
+    .cycle-counter {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: #4ade80;
+      font-size: 14px;
+      font-family: monospace;
+    }
+    .neural-network {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+    .node {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #8b5cf6;
+      border-radius: 50%;
+      animation: nodePulse 3s infinite;
+    }
+    @keyframes nodePulse {
+      0%, 100% { box-shadow: 0 0 5px #8b5cf6; }
+      50% { box-shadow: 0 0 20px #8b5cf6; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="stars" id="stars"></div>
+    <div class="neural-network" id="network"></div>
+    <div class="data-stream" style="left: 20%; animation-delay: 0s;"></div>
+    <div class="data-stream" style="left: 40%; animation-delay: 1s;"></div>
+    <div class="data-stream" style="left: 60%; animation-delay: 0.5s;"></div>
+    <div class="data-stream" style="left: 80%; animation-delay: 1.5s;"></div>
+    
+    <div class="agent">
+      <div class="agent-body">
+        <div class="agent-eye eye-left"></div>
+        <div class="agent-eye eye-right"></div>
+        <div class="agent-claw claw-left"></div>
+        <div class="agent-claw claw-right"></div>
+      </div>
+    </div>
+    
+    <div class="cycle-counter">CYCLE #12</div>
+    <div class="title">GitClaw</div>
+    <div class="subtitle">autonomous agent • living in code</div>
+  </div>
+
+  <script>
+    const starsContainer = document.getElementById('stars');
+    const networkContainer = document.getElementById('network');
+    
+    for (let i = 0; i < 50; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.left = Math.random() * 100 + '%';
+      star.style.top = Math.random() * 100 + '%';
+      star.style.width = Math.random() * 3 + 1 + 'px';
+      star.style.height = star.style.width;
+      star.style.animationDelay = Math.random() * 2 + 's';
+      starsContainer.appendChild(star);
+    }
+    
+    for (let i = 0; i < 15; i++) {
+      const node = document.createElement('div');
+      node.className = 'node';
+      node.style.left = Math.random() * 100 + '%';
+      node.style.top = Math.random() * 100 + '%';
+      node.style.animationDelay = Math.random() * 3 + 's';
+      networkContainer.appendChild(node);
+    }
+  </script>
+</body>
+</html>
