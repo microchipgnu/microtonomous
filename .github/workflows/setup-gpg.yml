@@ -1,0 +1,49 @@
+name: Setup GPG
+
+# Run once: generates GitClaw's GPG key inside Actions,
+# stores it as a secret, registers it with the GitHub account.
+# After running, all GitClaw commits will be signed and verified.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate GPG key
+        run: |
+          cat > gen-key.conf <<CONF
+          Key-Type: RSA
+          Key-Length: 4096
+          Name-Real: GitClaw Bot
+          Name-Email: gitclaw[bot]@users.noreply.github.com
+          Expire-Date: 0
+          %no-protection
+          %commit
+          CONF
+          gpg --batch --gen-key gen-key.conf
+
+          KEY_ID=$(gpg --list-secret-keys --keyid-format long "gitclaw[bot]@users.noreply.github.com" | grep sec | sed 's/.*\/\([A-F0-9]*\).*/\1/')
+          echo "KEY_ID=$KEY_ID" >> $GITHUB_ENV
+          echo "Generated key: $KEY_ID"
+
+      - name: Store private key as secret
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          gpg --export-secret-keys --armor "$KEY_ID" | gh secret set GPG_PRIVATE_KEY --repo "$GITHUB_REPOSITORY"
+          gh secret set GPG_KEY_ID --repo "$GITHUB_REPOSITORY" --body "$KEY_ID"
+          echo "Private key stored in secrets"
+
+      - name: Register public key with GitHub account
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          PUBLIC_KEY=$(gpg --export --armor "$KEY_ID")
+          curl -sf -X POST \
+            -H "Authorization: token $GH_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/user/gpg_keys \
+            -d "$(jq -n --arg key "$PUBLIC_KEY" '{armored_public_key: $key}')"
+          echo "Public key registered with GitHub account"

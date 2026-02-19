@@ -1,0 +1,40 @@
+# Credentials (written at runtime, never committed)
+.agentwallet/
+
+# Runtime output (committed by agent, not part of template)
+output/
+
+# Local editor/tool settings
+.claude/
+
+# Agent symlink dirs created by skills installer
+.adal/
+.agent/
+.augment/
+.cline/
+.codebuddy/
+.commandcode/
+.continue/
+.crush/
+.cursor/
+.factory/
+.goose/
+.iflow/
+.junie/
+.kilocode/
+.kiro/
+.kode/
+.mcpjam/
+.mux/
+.neovate/
+.openhands/
+.pi/
+.pochi/
+.qoder/
+.qwen/
+.roo/
+.trae/
+.vibe/
+.windsurf/
+.zencoder/
+skills/

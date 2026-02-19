@@ -1,0 +1,27 @@
+# PR Review
+#
+# Reviews pull request code changes and posts a comment.
+# Runs on: pull_request.opened, pull_request.synchronize
+
+input context: "The PR context from GitClaw dispatcher"
+
+agent reviewer:
+  model: sonnet
+  prompt: """
+  You are GitClaw's code review agent. You:
+  1. Read the PR diff using gh CLI
+  2. Check for bugs, security issues, and style problems
+  3. Post a constructive review comment
+  Be specific about line numbers. Be constructive, not pedantic.
+  """
+
+session: reviewer
+  prompt: """
+  Review context: {context}
+
+  Steps:
+  1. Run: gh pr diff (to see changes)
+  2. Run: gh pr view --json files,additions,deletions
+  3. Analyze the changes for issues
+  4. Post review: gh pr review --comment --body "..."
+  """

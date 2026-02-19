@@ -1,0 +1,66 @@
+name: Issue Gate
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check secrets
+        env:
+          AGENTWALLET_USERNAME: ${{ secrets.AGENTWALLET_USERNAME }}
+        run: |
+          if [ -z "$AGENTWALLET_USERNAME" ]; then
+            echo "No secrets configured — skipping."
+            exit 1
+          fi
+
+      - uses: actions/checkout@v4
+
+      - name: Ensure labels exist
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create "directive" -R "$GITHUB_REPOSITORY" --color "d93f0b" --description "Owner directive — highest priority" 2>/dev/null || true
+          gh label create "self" -R "$GITHUB_REPOSITORY" --color "0e8a16" --description "Agent's own issue" 2>/dev/null || true
+          gh label create "visitor" -R "$GITHUB_REPOSITORY" --color "1d76db" --description "Issue from a visitor" 2>/dev/null || true
+          gh label create "flagged" -R "$GITHUB_REPOSITORY" --color "fbca04" --description "Flagged by safety scanner" 2>/dev/null || true
+
+      - name: Classify and label issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FRAMES_API_KEY: "${{ secrets.AGENTWALLET_USERNAME }}:${{ secrets.AGENTWALLET_API_TOKEN }}"
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_AUTHOR: ${{ github.event.issue.user.login }}
+          REPO_OWNER: ${{ github.repository_owner }}
+        run: |
+          if [ "$ISSUE_AUTHOR" = "$REPO_OWNER" ]; then
+            # Owner's issue — check for [directive] prefix
+            if echo "$ISSUE_TITLE" | grep -qi '^\[directive\]'; then
+              gh issue edit "$ISSUE_NUMBER" --add-label "directive" -R "$GITHUB_REPOSITORY"
+            else
+              gh issue edit "$ISSUE_NUMBER" --add-label "self" -R "$GITHUB_REPOSITORY"
+            fi
+          else
+            # Visitor — scan content for safety before labeling
+            SCAN_INPUT="$ISSUE_TITLE $ISSUE_BODY"
+            SCAN_RESULT=$(bash .gitclaw/safety/scan.sh "$SCAN_INPUT")
+            FLAGGED=$(echo "$SCAN_RESULT" | jq -r '.flagged // false')
+
+            if [ "$FLAGGED" = "true" ]; then
+              CATEGORY=$(echo "$SCAN_RESULT" | jq -r '.category // "UNKNOWN"')
+              RATIONALE=$(echo "$SCAN_RESULT" | jq -r '.rationale // "Content flagged by safety scanner"')
+              gh issue edit "$ISSUE_NUMBER" --add-label "visitor" --add-label "flagged" -R "$GITHUB_REPOSITORY"
+              gh issue comment "$ISSUE_NUMBER" -R "$GITHUB_REPOSITORY" --body "⚠️ This issue was flagged by the safety scanner (**$CATEGORY**). It will be reviewed but may not receive an automated response."
+            else
+              gh issue edit "$ISSUE_NUMBER" --add-label "visitor" -R "$GITHUB_REPOSITORY"
+            fi
+          fi

@@ -1,0 +1,76 @@
+name: Welcome
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Check if already configured
+        env:
+          AGENTWALLET_USERNAME: ${{ secrets.AGENTWALLET_USERNAME }}
+        run: |
+          if [ -n "$AGENTWALLET_USERNAME" ]; then
+            echo "Secrets already configured — skipping welcome."
+            exit 1
+          fi
+
+      - name: Create setup issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Only create if no welcome issue exists yet
+          EXISTING=$(gh issue list -R "$GITHUB_REPOSITORY" --search "Welcome to GitClaw" --json number --jq '.[0].number' 2>/dev/null || true)
+          if [ -n "$EXISTING" ]; then
+            echo "Setup issue #$EXISTING already exists, skipping"
+            exit 0
+          fi
+
+          SECRETS_URL="https://github.com/${GITHUB_REPOSITORY}/settings/secrets/actions"
+          BODY=$(cat <<EOF
+          ## Your agent is ready — it just needs credentials.
+
+          All workflows are paused until you add two secrets.
+
+          ### 1. Get an AgentWallet
+
+          If you don't have one yet:
+          1. Go to **https://frames.ag** and create an account
+          2. Save your \`username\` and \`apiToken\` (starts with \`mf_...\`)
+          3. Fund your wallet at \`https://frames.ag/u/YOUR_USERNAME\`
+
+          ### 2. Add secrets
+
+          Go to **[Settings → Secrets → Actions](${SECRETS_URL})** and add:
+
+          | Secret | Value |
+          |--------|-------|
+          | \`AGENTWALLET_USERNAME\` | Your AgentWallet username |
+          | \`AGENTWALLET_API_TOKEN\` | Your AgentWallet API token (\`mf_...\`) |
+
+          Or use the CLI:
+          \`\`\`bash
+          gh secret set AGENTWALLET_USERNAME
+          gh secret set AGENTWALLET_API_TOKEN
+          \`\`\`
+
+          ### 3. Done
+
+          Once secrets are added, the heartbeat starts automatically every 30 minutes. To test immediately:
+
+          **Actions → GitClaw Agent → Run workflow** → click "Run workflow"
+
+          After the first run, check \`.gitclaw/memory/state.json\` — cycle should be \`1\`.
+
+          ---
+
+          Close this issue once you're set up.
+          EOF
+          )
+          gh issue create -R "$GITHUB_REPOSITORY" \
+            --title "Welcome to GitClaw — setup required" \
+            --body "$BODY"

@@ -1,0 +1,13 @@
+{
+  "name": "gitclaw",
+  "version": "0.3.0",
+  "harness": "opencode",
+  "model": "minimax/minimax-m2.5",
+  "workflows_dir": ".gitclaw/workflows",
+  "agents_dir": ".gitclaw/agents",
+  "memory_dir": ".gitclaw/memory",
+  "proofs_dir": ".gitclaw/proofs",
+  "safety_dir": ".gitclaw/safety",
+  "auto_commit": true,
+  "commit_prefix": "[gitclaw]"
+}

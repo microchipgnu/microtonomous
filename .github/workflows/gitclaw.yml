@@ -1,0 +1,154 @@
+name: GitClaw Agent
+
+on:
+  schedule:
+    - cron: '0,30 * * * *'   # Every 30 minutes — heartbeat
+  issues:
+    types: [opened, labeled]
+  issue_comment:
+    types: [created]
+  pull_request:
+    types: [opened, synchronize]
+  workflow_dispatch:
+    inputs:
+      workflow:
+        description: 'Prose workflow file to run'
+        required: true
+        default: '.gitclaw/workflows/heartbeat.prose'
+      prompt:
+        description: 'Additional context for the agent'
+        required: false
+
+concurrency:
+  group: gitclaw
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check secrets
+        env:
+          AGENTWALLET_USERNAME: ${{ secrets.AGENTWALLET_USERNAME }}
+        run: |
+          if [ -z "$AGENTWALLET_USERNAME" ]; then
+            echo "No secrets configured — skipping. Add AGENTWALLET_USERNAME and AGENTWALLET_API_TOKEN to activate."
+            exit 1
+          fi
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Mask secrets
+        env:
+          AGENTWALLET_USERNAME: ${{ secrets.AGENTWALLET_USERNAME }}
+          AGENTWALLET_API_TOKEN: ${{ secrets.AGENTWALLET_API_TOKEN }}
+        run: |
+          for secret in "$AGENTWALLET_USERNAME" "$AGENTWALLET_API_TOKEN"; do
+            if [ -n "$secret" ]; then
+              echo "::add-mask::$secret"
+            fi
+          done
+
+      - name: Configure git + GPG signing
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
+        run: |
+          git config user.name "GitClaw Bot"
+          git config user.email "gitclaw[bot]@users.noreply.github.com"
+          if [ -n "$GPG_PRIVATE_KEY" ]; then
+            echo "$GPG_PRIVATE_KEY" | gpg --batch --import
+            git config commit.gpgsign true
+            git config user.signingkey "$GPG_KEY_ID"
+            echo "GPG signing enabled"
+          else
+            echo "No GPG key — run setup-gpg workflow first"
+          fi
+
+      - name: Install OpenCode
+        run: |
+          for i in 1 2 3; do
+            curl -fsSL https://opencode.ai/install | bash && break
+            echo "Attempt $i failed, retrying in 5s..."
+            sleep 5
+          done
+
+      - name: Bootstrap workspace
+        run: npx wordspace@latest init --force
+
+      - name: Configure AgentWallet
+        env:
+          AGENTWALLET_USERNAME: ${{ secrets.AGENTWALLET_USERNAME }}
+          AGENTWALLET_API_TOKEN: ${{ secrets.AGENTWALLET_API_TOKEN }}
+        run: |
+          set +x
+          mkdir -p ~/.agentwallet
+          printf '{"username":"%s","apiToken":"%s"}' "$AGENTWALLET_USERNAME" "$AGENTWALLET_API_TOKEN" > ~/.agentwallet/config.json
+          chmod 600 ~/.agentwallet/config.json
+          mkdir -p .agentwallet
+          cp ~/.agentwallet/config.json .agentwallet/config.json
+          chmod 600 .agentwallet/config.json
+          echo "AgentWallet configured"
+
+      - name: Configure Frames Registry for OpenCode
+        env:
+          AGENTWALLET_USERNAME: ${{ secrets.AGENTWALLET_USERNAME }}
+          AGENTWALLET_API_TOKEN: ${{ secrets.AGENTWALLET_API_TOKEN }}
+        run: |
+          set +x
+          export FRAMES_API_KEY="${AGENTWALLET_USERNAME}:${AGENTWALLET_API_TOKEN}"
+          echo "FRAMES_API_KEY=$FRAMES_API_KEY" >> $GITHUB_ENV
+          echo "::add-mask::$FRAMES_API_KEY"
+          mkdir -p ~/.local/share/opencode
+          printf '{"frames":{"type":"api","key":"%s"}}' "$FRAMES_API_KEY" > ~/.local/share/opencode/auth.json
+          chmod 600 ~/.local/share/opencode/auth.json
+          echo "Frames Registry configured"
+
+      - name: Determine workflow
+        id: route
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "workflow=${{ github.event.inputs.workflow }}" >> $GITHUB_OUTPUT
+            echo "context=${{ github.event.inputs.prompt }}" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event_name }}" = "schedule" ]; then
+            echo "workflow=.gitclaw/workflows/heartbeat.prose" >> $GITHUB_OUTPUT
+            echo "context=Scheduled heartbeat" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event_name }}" = "issues" ]; then
+            echo "workflow=.gitclaw/workflows/heartbeat.prose" >> $GITHUB_OUTPUT
+            echo "context=Issue #${{ github.event.issue.number }}: ${{ github.event.issue.title }}" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "workflow=.gitclaw/workflows/review.prose" >> $GITHUB_OUTPUT
+            echo "context=PR #${{ github.event.pull_request.number }}: ${{ github.event.pull_request.title }}" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event_name }}" = "issue_comment" ]; then
+            echo "workflow=.gitclaw/workflows/heartbeat.prose" >> $GITHUB_OUTPUT
+            echo "context=Comment on issue #${{ github.event.issue.number }}: ${{ github.event.comment.body }}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run GitClaw workflow
+        env:
+          FRAMES_API_KEY: ${{ env.FRAMES_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENCODE_DISABLE_AUTOUPDATE: "1"
+        run: |
+          npx wordspace@latest run \
+            --harness opencode \
+            --verbose \
+            --params '{"context":"${{ steps.route.outputs.context }}","event":"${{ github.event_name }}"}' \
+            ${{ steps.route.outputs.workflow }}
+
+      - name: Commit agent changes
+        run: |
+          git add .gitclaw/agents/ .gitclaw/memory/ .gitclaw/proofs/
+          git add -f output/ 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "[gitclaw] Agent run: ${{ github.event_name }} $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git pull --rebase || true
+          git push
