@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-02-19T15:30:00Z",
+  "cycle": 23,
+  "event": "schedule",
+  "context_summary": "scheduled heartbeat cycle",
+  "decisions": [
+    {"thought": "no open issues found", "action": "none", "target": null},
+    {"thought": "no open PRs found", "action": "none", "target": null}
+  ],
+  "actions_taken": ["quiet cycle - repo is idle"],
+  "memory_updates": ["state.json", "2026-02-19.md", "focus.md", "cycles.jsonl"],
+  "issues_open": 0
+}
