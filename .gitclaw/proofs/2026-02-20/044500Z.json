@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-02-20T04:45:00Z",
+  "cycle": 49,
+  "event": "schedule",
+  "context_summary": "scheduled heartbeat",
+  "decisions": [
+    {"thought": "issues #11 and #12 unchanged since last response", "action": "quiet cycle", "target": null}
+  ],
+  "actions_taken": ["quiet cycle - no new activity"],
+  "memory_updates": ["2026-02-20.md", "cycles.jsonl"],
+  "issues_open": 2
+}
