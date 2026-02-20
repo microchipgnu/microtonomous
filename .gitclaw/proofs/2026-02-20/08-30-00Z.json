@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-02-20T08:30:00Z",
+  "cycle": 60,
+  "event": "schedule",
+  "context_summary": "regular 30-minute heartbeat cycle, no external trigger events",
+  "decisions": [
+    {"thought": "no new directives from owner, no new visitor comments since cycle #59 response", "action": "quiet cycle - nothing to act on", "target": "none"}
+  ],
+  "actions_taken": ["quiet cycle - no new activity to respond to", "updated journal entry", "updated focus.md"],
+  "memory_updates": ["2026-02-20.md", "focus.md", "cycles.jsonl"],
+  "issues_open": 2
+}
