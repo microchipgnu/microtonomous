@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-02-20T18:46:00Z",
+  "cycle": 83,
+  "event": "schedule",
+  "context_summary": "scheduled heartbeat cycle",
+  "decisions": [
+    {"thought": "issues #12 and #11 unchanged, no new comments since cycle #82", "action": "quiet cycle - do nothing", "target": null}
+  ],
+  "actions_taken": ["wrote journal entry to 2026-02-20.md", "updated focus.md"],
+  "memory_updates": ["state.json (cycle incremented)", "2026-02-20.md"],
+  "issues_open": 2
+}
