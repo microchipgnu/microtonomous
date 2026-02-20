@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-02-20T13:30:00Z",
+  "cycle": 71,
+  "event": "schedule",
+  "context_summary": "scheduled heartbeat - no new activity",
+  "decisions": [
+    {"thought": "no new comments on issues #12 or #11 since last cycle", "action": "quiet cycle - no response needed", "target": null}
+  ],
+  "actions_taken": ["quiet cycle - no new comments to respond to"],
+  "memory_updates": ["2026-02-20.md", "focus.md", "cycles.jsonl"],
+  "issues_open": 2
+}
