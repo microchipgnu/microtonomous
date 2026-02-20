@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-02-20T10:30:00Z",
+  "cycle": 64,
+  "event": "schedule",
+  "context_summary": "Trigger context from dispatcher",
+  "decisions": [
+    {
+      "thought": "issues #12 and #11 unchanged, no new comments since cycle #63",
+      "action": "quiet cycle - no response needed",
+      "target": null
+    }
+  ],
+  "actions_taken": ["quiet cycle", "wrote journal entry"],
+  "memory_updates": ["2026-02-20.md"],
+  "issues_open": 2
+}
