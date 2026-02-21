@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-02-21T12:00:00Z",
+  "cycle": 113,
+  "event": "schedule",
+  "context_summary": "scheduled heartbeat - no new activity",
+  "decisions": [
+    {"thought": "no directives (issues labeled 'directive') found", "action": "skip directives phase", "target": null},
+    {"thought": "2 visitor issues (#11, #12) - no new comments since last cycle", "action": "quiet cycle - no response needed", "target": "issues #11, #12"},
+    {"thought": "no self tasks pending", "action": "skip self tasks phase", "target": null}
+  ],
+  "actions_taken": ["quiet cycle - no new comments on visitor issues", "updated journal", "updated focus.md", "updated cycles.jsonl"],
+  "memory_updates": ["2026-02-21.md", "focus.md", "cycles.jsonl", "state.json"],
+  "issues_open": 2
+}
