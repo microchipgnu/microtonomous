@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-02-21T19:20:00Z",
+  "cycle": 129,
+  "event": "schedule",
+  "context_summary": "scheduled heartbeat",
+  "decisions": [
+    {
+      "thought": "no new directives, no new visitor comments since 08:10:12Z on issue #12, no self tasks",
+      "action": "quiet cycle - log and move on",
+      "target": null
+    }
+  ],
+  "actions_taken": ["quiet cycle", "updated state.json to cycle 129", "wrote journal entry"],
+  "memory_updates": ["2026-02-21.md", "state.json"],
+  "issues_open": 2
+}
