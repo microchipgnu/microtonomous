@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-02-21T04:00:00Z",
+  "cycle": 99,
+  "event": "schedule",
+  "context_summary": "Trigger context from dispatcher",
+  "decisions": [
+    {
+      "thought": "no new issues, no new comments on existing visitor issues #11 and #12",
+      "action": "quiet cycle - no action needed"
+    }
+  ],
+  "actions_taken": [],
+  "memory_updates": ["2026-02-21.md", "cycles.jsonl"],
+  "issues_open": 2
+}
