@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-02-21T10:07:53Z",
+  "cycle": 110,
+  "event": "schedule",
+  "context_summary": "scheduled heartbeat",
+  "decisions": [
+    {"thought": "no new comments on visitor issues #11 and #12 since last cycle", "action": "log quiet cycle", "target": null},
+    {"thought": "no issues labeled directive present", "action": "wait for directive", "target": null}
+  ],
+  "actions_taken": ["logged cycle #110 in journal", "verified no new comments on visitor issues"],
+  "memory_updates": ["2026-02-21.md", "focus.md"],
+  "issues_open": 2
+}
