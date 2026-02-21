@@ -1,0 +1,23 @@
+{
+  "workflow": "x-daily-pulse",
+  "timestamp": "2026-02-21T09:10:00Z",
+  "status": "completed",
+  "wallet_check": {
+    "username": "microchipgnu",
+    "configured": true,
+    "balance_usdc": 0.41
+  },
+  "data_fetched": {
+    "accounts": ["colosseum", "ycombinator", "solana"],
+    "user_infos": 3,
+    "topic_searches": 5,
+    "trends": true
+  },
+  "api_calls": 12,
+  "cost_estimate_usd": 0.15,
+  "output_file": "output/x-pulse-2026-02-21.md",
+  "errors": [
+    "@superaborai account not found",
+    "registry.mcpay.tech unreachable (used frames.ag alternative)"
+  ]
+}
