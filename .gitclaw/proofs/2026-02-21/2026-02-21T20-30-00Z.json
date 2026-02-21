@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-02-21T20:30:00Z",
+  "cycle": 133,
+  "event": "schedule",
+  "context_summary": "scheduled heartbeat",
+  "decisions": [
+    {"thought": "no directive issues, visitor issues already answered", "action": "quiet cycle", "target": "none"}
+  ],
+  "actions_taken": ["updated state.json to cycle 133", "wrote journal entry for cycle 133"],
+  "memory_updates": ["state.json", "2026-02-21.md"],
+  "issues_open": 2
+}
