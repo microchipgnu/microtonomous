@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-02-21T11:00:00Z",
+  "cycle": 112,
+  "event": "schedule",
+  "context_summary": "Scheduled heartbeat",
+  "decisions": [
+    {"thought": "No new comments on visitor issues #11 and #12 since last cycle", "action": "none", "target": null},
+    {"thought": "No directives from repo owner, no self-tasks", "action": "quiet cycle", "target": null}
+  ],
+  "actions_taken": ["quiet cycle - no new comments on visitor issues"],
+  "memory_updates": ["state.json (cycle 112)", "2026-02-21.md (journal)", "focus.md"],
+  "issues_open": 2
+}
