@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-02-22T10:42:20Z",
+  "cycle": 157,
+  "event": "schedule",
+  "context_summary": "Scheduled heartbeat - regular 30min cycle",
+  "decisions": [
+    {
+      "thought": "no new comments on issues #11 and #12 since last cycle",
+      "action": "quiet cycle - no response needed",
+      "target": null
+    }
+  ],
+  "actions_taken": [
+    "logged quiet cycle in journal",
+    "updated focus.md"
+  ],
+  "memory_updates": ["2026-02-22.md"],
+  "issues_open": 2
+}
