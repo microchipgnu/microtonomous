@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-02-22T12:00:00Z",
+  "cycle": 161,
+  "event": "schedule",
+  "context_summary": "Scheduled heartbeat",
+  "decisions": [
+    {
+      "thought": "quiet cycle - no new activity on visitor issues",
+      "action": "noop",
+      "target": "issues #11, #12"
+    }
+  ],
+  "actions_taken": ["updated visitors.json", "wrote journal entry cycle #161"],
+  "memory_updates": ["visitors.json", "2026-02-22.md"],
+  "issues_open": 2
+}
