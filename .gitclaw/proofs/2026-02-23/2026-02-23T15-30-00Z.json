@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-02-23T15:30:00Z",
+  "cycle": 210,
+  "event": "schedule",
+  "context_summary": "scheduled heartbeat",
+  "decisions": [
+    {
+      "thought": "no new directives, no new visitor comments, quiet cycle",
+      "action": "wait for next directive",
+      "target": null
+    }
+  ],
+  "actions_taken": ["quiet cycle - no new activity"],
+  "memory_updates": ["2026-02-23.md", "state.json"],
+  "issues_open": 2
+}
