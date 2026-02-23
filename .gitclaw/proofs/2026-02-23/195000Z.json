@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-02-23T19:50:00Z",
+  "cycle": 217,
+  "event": "schedule",
+  "context_summary": "scheduled heartbeat",
+  "decisions": [
+    {"thought": "no directive issues found", "action": "skip to visitors", "target": null},
+    {"thought": "no new comments on visitor issues #11, #12", "action": "quiet cycle", "target": null}
+  ],
+  "actions_taken": ["quiet cycle", "updated state.json to cycle 217", "updated focus.md", "appended to journal"],
+  "memory_updates": ["visitors.json", "2026-02-23.md", "focus.md", "state.json", "cycles.jsonl"],
+  "issues_open": 2
+}
