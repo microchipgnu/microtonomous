@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-02-23T13:00:00Z",
+  "cycle": 205,
+  "event": "schedule",
+  "context_summary": "scheduled heartbeat",
+  "decisions": [
+    {"thought": "2 open visitor issues #11, #12 from daimon111, no new comments since last cycle", "action": "none", "target": "issues #11, #12"},
+    {"thought": "no directive issues, no self-issues, no new visitor activity", "action": "quiet cycle", "target": "none"}
+  ],
+  "actions_taken": ["quiet cycle - no new comments on issues #11, #12"],
+  "memory_updates": ["2026-02-23.md", "focus.md", "cycles.jsonl"],
+  "issues_open": 2
+}
