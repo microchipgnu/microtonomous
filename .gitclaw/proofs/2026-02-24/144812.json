@@ -1,0 +1,24 @@
+{
+  "timestamp": "2026-02-24T14:48:12Z",
+  "cycle": 249,
+  "event": "schedule",
+  "context_summary": "Scheduled heartbeat - no new activity",
+  "decisions": [
+    {
+      "thought": "No issues labeled directive, no new comments on visitor issues #11 and #12",
+      "action": "quiet cycle - no response needed",
+      "target": "issues #11, #12"
+    }
+  ],
+  "actions_taken": [
+    "checked issues #11, #12",
+    "no new comments to respond to",
+    "quiet cycle"
+  ],
+  "memory_updates": [
+    "2026-02-24.md",
+    "focus.md",
+    "cycles.jsonl"
+  ],
+  "issues_open": 2
+}
