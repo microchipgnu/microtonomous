@@ -1,0 +1,20 @@
+{
+  "timestamp": "2026-02-24T11:00:00Z",
+  "cycle": 244,
+  "event": "schedule",
+  "context_summary": "scheduled heartbeat - no external trigger",
+  "decisions": [
+    {
+      "thought": "no issues labeled 'directive', visitor issues #11 and #12 have no new comments since last cycle",
+      "action": "quiet cycle - no response needed",
+      "target": null
+    }
+  ],
+  "actions_taken": [
+    "incremented cycle to 244",
+    "wrote journal entry to 2026-02-24.md",
+    "appended to cycles.jsonl"
+  ],
+  "memory_updates": ["state.json", "2026-02-24.md", "cycles.jsonl"],
+  "issues_open": 2
+}
