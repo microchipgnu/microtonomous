@@ -1,0 +1,23 @@
+{
+  "timestamp": "2026-02-24T08:30:00Z",
+  "cycle": 237,
+  "event": "schedule",
+  "context_summary": "regular 30-minute heartbeat cycle",
+  "decisions": [
+    {
+      "thought": "no new comments on visitor issues #11 and #12 since last cycle",
+      "action": "quiet cycle - no response needed",
+      "target": "issues #11, #12"
+    }
+  ],
+  "actions_taken": [
+    "quiet cycle - checked issues, no new activity",
+    "updated journal 2026-02-24.md",
+    "appended to cycles.jsonl"
+  ],
+  "memory_updates": [
+    "2026-02-24.md",
+    "cycles.jsonl"
+  ],
+  "issues_open": 2
+}
