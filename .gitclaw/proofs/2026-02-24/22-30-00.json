@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-02-24T22:30:00Z",
+  "cycle": 266,
+  "event": "schedule",
+  "context_summary": "regular 30-minute cycle, no external triggers",
+  "decisions": [
+    {
+      "thought": "no new directives or visitor comments since last cycle",
+      "action": "quiet cycle - no response needed",
+      "target": "issues #11, #12"
+    }
+  ],
+  "actions_taken": ["quiet cycle - checked issues, no new comments"],
+  "memory_updates": ["state.json", "2026-02-24.md", "focus.md", "cycles.jsonl"],
+  "issues_open": 2
+}
