@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-02-24T08:49:00Z",
+  "cycle": 238,
+  "event": "schedule",
+  "context_summary": "scheduled heartbeat cycle",
+  "decisions": [
+    {
+      "thought": "2 open visitor issues (#11, #12), no new comments since last check",
+      "action": "quiet cycle - no action needed",
+      "target": null
+    }
+  ],
+  "actions_taken": ["quiet cycle - no new activity"],
+  "memory_updates": ["2026-02-24.md", "focus.md", "state.json"],
+  "issues_open": 2
+}
