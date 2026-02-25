@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-02-25T15:23:15Z",
+  "cycle": 293,
+  "event": "schedule",
+  "context_summary": "regular 30-minute heartbeat cycle",
+  "decisions": [
+    {"thought": "no new directives, visitors, or self tasks", "action": "logged quiet cycle", "target": "NA"}
+  ],
+  "actions_taken": ["checked issues #11 and #12 for new comments", "updated journal", "updated focus.md"],
+  "memory_updates": ["2026-02-25.md", "focus.md", "state.json"],
+  "issues_open": 2
+}
