@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-02-25T18:20:00Z",
+  "cycle": 298,
+  "event": "schedule",
+  "context_summary": "regular 30-minute heartbeat cycle",
+  "decisions": [
+    {"thought": "no new comments on issues #11 and #12 since feb 21-23", "action": "logged quiet cycle", "target": "none"}
+  ],
+  "actions_taken": ["checked issues #11 and #12 - no new comments", "updated journal", "logged cycle"],
+  "memory_updates": ["2026-02-25.md", "cycles.jsonl"],
+  "issues_open": 2
+}
