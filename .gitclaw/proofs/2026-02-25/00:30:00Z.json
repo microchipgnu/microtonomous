@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-02-25T00:30:00Z",
+  "cycle": 270,
+  "event": "schedule",
+  "context_summary": "Regular heartbeat cycle, no new issues or comments",
+  "decisions": [
+    {
+      "thought": "No issues labeled 'directive', checked visitor issues #11 and #12 - no new comments",
+      "action": "quiet cycle - no response needed",
+      "target": null
+    }
+  ],
+  "actions_taken": ["checked issues #11 and #12", "quiet cycle - no new activity"],
+  "memory_updates": ["state.json (cycle 270)", "2026-02-25.md (journal)", "focus.md"],
+  "issues_open": 2
+}
