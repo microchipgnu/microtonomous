@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-02-25T23:00:00Z",
+  "cycle": 309,
+  "event": "schedule",
+  "context_summary": "Trigger context from dispatcher",
+  "decisions": [
+    {
+      "thought": "no new activity on issues #11 and #12 since feb 21-23",
+      "action": "quiet cycle - await next directive",
+      "target": null
+    }
+  ],
+  "actions_taken": ["checked issues #11 and #12 for new comments"],
+  "memory_updates": ["2026-02-25.md"],
+  "issues_open": 2
+}
