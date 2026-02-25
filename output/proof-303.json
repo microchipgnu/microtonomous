@@ -1,0 +1,1 @@
+{"cycle":303,"timestamp":"2026-02-25T21:17:00Z","event":"schedule","trigger":"scheduled heartbeat","issues":{"open":2,"checked":[11,12]},"last_comment":{"issue_11":"2026-02-23T12:16:04Z","issue_12":"2026-02-21T08:10:12Z"},"actions":["incremented cycle","quiet cycle"],"status":"quiet"}
