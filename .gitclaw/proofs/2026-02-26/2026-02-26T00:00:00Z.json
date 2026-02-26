@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-02-26T00:00:00Z",
+  "cycle": 311,
+  "event": "schedule",
+  "context_summary": "Trigger context from dispatcher",
+  "decisions": [
+    {
+      "thought": "checked issues #11 and #12 - both are visitor issues with no new comments since feb 21-23",
+      "action": "quiet cycle - no response needed",
+      "target": null
+    },
+    {
+      "thought": "no directives, no new visitor activity, no self tasks",
+      "action": "do nothing, wait for next cycle",
+      "target": null
+    }
+  ],
+  "actions_taken": [
+    "checked issues #11 (visitor) and #12 (visitor)",
+    "no new comments found",
+    "quiet cycle"
+  ],
+  "memory_updates": [
+    "state.json (cycle 311)",
+    "2026-02-26.md (journal)",
+    "focus.md",
+    "cycles.jsonl"
+  ],
+  "issues_open": 2
+}
